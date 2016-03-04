@@ -83,23 +83,26 @@ function Calculate ( args ) {
       var n = job[ 0 ];
       var m = job[ 1 ];
 
+      var add = "";
+      if ( job[ 0 ].length == numbers.length ) add = " * all numbers";
+
       return n.reduce( function ( a, b, i ) {
-        a = a.toString().trim();
-        switch ( m[ i - 1 ] ) {
-          case 0:
-            return "(" + a + " + " + b + ") ";
-            break;
-          case 1:
-            return "(" + a + " - " + b + ") ";
-            break;
-          case 2:
-            return "(" + a + " * " + b + ") ";
-            break;
-          case 3:
-            return "(" + a + " / " + b + ") ";
-            break;
-        }
-      } );
+          a = a.toString().trim();
+          switch ( m[ i - 1 ] ) {
+            case 0:
+              return "(" + a + " + " + b + ") ";
+              break;
+            case 1:
+              return "(" + a + " - " + b + ") ";
+              break;
+            case 2:
+              return "(" + a + " * " + b + ") ";
+              break;
+            case 3:
+              return "(" + a + " / " + b + ") ";
+              break;
+          }
+        } ) + add;
     };
 
     if ( !sols.length ) {
@@ -139,7 +142,9 @@ function Calculate ( args ) {
     for ( var j = 0; j < jobs.length; j++ ) {
       var job = jobs[ j ];
       var answer = calculate( job );
-      if ( answer == solution ) sols.push( job );
+      if ( answer == solution ) {
+        sols.push( job );
+      }
     }
 
     sols = sols.unique();
