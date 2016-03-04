@@ -203,6 +203,5 @@ function Calculate ( args ) {
   assignVariables();
 }
 
-
 var args = process.argv.slice( 2 );
 Calculate( args );
