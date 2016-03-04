@@ -2,7 +2,7 @@
 2 from the top, rest is up to your Rachel...
 
 This is a node/js based simple app to calculate the requested solution with the given numbers.
-Tries to find all available solutions, so it might give 2*50 and 50*2 at the same solution as different answers :)
+Tries to find all available solutions, so it might give 2x50 and 50x2 at the same solution as different answers :)
 
 Usage (node app [SOLUTION] [NUMBERS...]):
 
