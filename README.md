@@ -2,6 +2,12 @@
 2 from the top, rest is up to your Rachel...
 
 This is a node/js based simple app to calculate the requested solution with the given numbers.
-Runs on console.
+Currently tries to use every given number for solution.
 
-There are a few Array prototype functions for some advanced/simple solutions if you want to check out.
+Usage (node app [SOLUTION] [NUMBERS...]):
+node app 692 100 75 4 3 6 7
+
+Returns:
+(((((100 + 75) - 3) - 6) + 7) * 4)
+
+You can give as much (or less) numbers as you like.
