@@ -2,6 +2,31 @@ String.prototype.paddingLeft = function ( paddingValue ) {
   return String( paddingValue + this ).slice( -paddingValue.length );
 };
 
+Array.prototype.subsets = function ( min ) {
+  if ( !min ) min = 1;
+
+  var subSet = function ( index, source, found, all ) {
+    if ( index == 0 ) {
+      if ( found.length > 0 ) {
+        all[ all.length ] = found;
+      }
+      return;
+    }
+    for ( var j = 0; j < source.length; j++ ) {
+      subSet( index - 1, source.slice( j + 1 ), found.concat( [ source[ j ] ] ), all );
+    }
+  };
+
+  var all = [];
+
+  for ( var i = min; i < this.length; i++ ) {
+    subSet( i, this, [], all );
+  }
+
+  all.push( this );
+  return all;
+};
+
 Array.prototype.unique = function () {
   var seen = {};
   var out = [];
@@ -48,6 +73,7 @@ function Calculate ( args ) {
   var solution = 0;
   var sols = [];
   var numbers = [];
+  var combinations = [];
   var operations = [];
   var jobs = [];
 
@@ -156,10 +182,10 @@ function Calculate ( args ) {
     }
   };
 
-  var generateOpers = function () {
+  var generateOpers = function ( nums ) {
 
     var operMaker = function ( i ) {
-      var nNumbers = numbers.clone();
+      var nNumbers = nums.clone();
       var first = nNumbers[ i ];
       nNumbers.moveToEnd( first );
       var oper = [];
@@ -170,8 +196,16 @@ function Calculate ( args ) {
       operations.push( [ nNumbers, oper ] );
     };
 
-    for ( var j = 0; j < numbers.length; j++ ) {
+    for ( var j = 0; j < nums.length; j++ ) {
       operMaker( j );
+    }
+  };
+
+  var generateSubSets = function () {
+    combinations = numbers.subsets( 2 );
+    for ( var i = 0; i < combinations.length; i++ ) {
+      var comb = combinations[ i ];
+      generateOpers( comb );
     }
   };
 
@@ -194,7 +228,7 @@ function Calculate ( args ) {
     }
 
     console.log( "Working for solution", solution );
-    generateOpers();
+    generateSubSets();
     generateJobs();
     solveJobs();
     printSolutions();
