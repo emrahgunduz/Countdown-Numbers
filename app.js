@@ -109,10 +109,9 @@ function Calculate ( args ) {
       console.log( "No solutions were found" );
     }
 
-    for ( var j = 0; j < sols.length; j++ ) {
-      console.log( printS( sols[ j ] ) );
-      // console.log( "console.log( " + printS( sols[ j ] ) + ");" );
-    }
+    sols.map( function ( sol ) {
+      console.log( printS( sol ) );
+    } );
   };
 
   var solveJobs = function () {
