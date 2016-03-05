@@ -73,7 +73,6 @@ function Calculate ( args ) {
   var solution = 0;
   var sols = [];
   var numbers = [];
-  var combinations = [];
   var operations = [];
   var jobs = [];
 
@@ -190,12 +189,8 @@ function Calculate ( args ) {
     var operMaker = function ( i ) {
       var nNumbers = nums.clone();
       var first = nNumbers[ i ];
+      var oper = new Array( nNumbers.length ).join( '0' ).split( '' ).map( parseFloat );
       nNumbers.moveToEnd( first );
-      var oper = [];
-      for ( var j = 0; j < nNumbers.length; j++ ) {
-        oper.push( 0 );
-      }
-      oper.pop();
       operations.push( [ nNumbers, oper ] );
     };
 
@@ -205,11 +200,9 @@ function Calculate ( args ) {
   };
 
   var generateSubSets = function () {
-    combinations = numbers.subsets( 2 );
-    for ( var i = 0; i < combinations.length; i++ ) {
-      var comb = combinations[ i ];
+    numbers.subsets( 2 ).map( function ( comb ) {
       generateOpers( comb );
-    }
+    } );
   };
 
   var assignVariables = function () {
@@ -223,11 +216,8 @@ function Calculate ( args ) {
     }
 
     for ( var i = 0; i < args.length; i++ ) {
-      if ( i == 0 ) {
-        solution = parseInt( args[ i ] );
-      } else {
-        numbers.push( parseInt( args[ i ] ) );
-      }
+      if ( i == 0 )solution = parseInt( args[ i ] );
+      else numbers.push( parseInt( args[ i ] ) );
     }
 
     console.log( "Working for solution", solution );
