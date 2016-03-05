@@ -138,21 +138,20 @@ function Calculate ( args ) {
       } );
     };
 
-    for ( var j = 0; j < jobs.length; j++ ) {
-      var job = jobs[ j ];
+    jobs.map( function ( job ) {
       var answer = calculate( job );
       if ( answer == solution ) {
         sols.push( job );
       }
-    }
+    } );
 
     sols = sols.unique();
   };
 
   var generateJobs = function () {
 
-    var jobMaker = function ( i ) {
-      var oper = operations[ i ].clone();
+    var jobMaker = function ( orig ) {
+      var oper = orig.clone();
       var o = oper[ 1 ].clone();
 
       var counter = 0;
@@ -181,9 +180,9 @@ function Calculate ( args ) {
       } while ( !stop );
     };
 
-    for ( var j = 0; j < operations.length; j++ ) {
-      jobMaker( j );
-    }
+    operations.map( function ( orig ) {
+      jobMaker( orig );
+    } );
   };
 
   var generateOpers = function ( nums ) {
