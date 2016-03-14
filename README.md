@@ -1,5 +1,5 @@
 # Countdown-Numbers
-2 from the top, rest is up to your Rachel...
+2 from the top, rest is up to you Rachel...
 
 This is a node/js based simple app to calculate the requested solution with the given numbers.
 Tries to find all available solutions, so it might give 2x50 and 50x2 at the same solution as different answers :)
